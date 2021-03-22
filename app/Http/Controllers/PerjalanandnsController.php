@@ -43,13 +43,13 @@ class PerjalanandnsController extends Controller
             'pegawaipdinas_id' => 'required',
             'tglsurat' => 'required',
             'no_surat' => 'required',
-            'perihal'=> 'required',
-            'tgl_berangkat'=> 'required',
-            'tgl_kembali'=> 'required',
-            'selama'=> 'required',
-            'tujuan'=> 'required',
-            'transportasi'=> 'required',
-            
+            'perihal' => 'required',
+            'tgl_berangkat' => 'required',
+            'tgl_kembali' => 'required',
+            'selama' => 'required',
+            'tujuan' => 'required',
+            'transportasi' => 'required',
+
         ], [
             'pegawaipdinas_id.required' => 'Pilihan tidak boleh kosong',
             'tglsurat.required' => 'Tanggal Surat tidak boleh kosong',
@@ -60,7 +60,7 @@ class PerjalanandnsController extends Controller
             'selama.required' => 'Cabang tidak boleh kosong',
             'tujuan.required' => 'Cabang tidak boleh kosong',
             'transportasi.required' => 'Cabang tidak boleh kosong'
-            
+
         ]);
         $perjalanandns = new Perjalanandns;
         $perjalanandns->pegawaipdinas_id = $request->pegawaipdinas_id;
@@ -82,9 +82,9 @@ class PerjalanandnsController extends Controller
      * @param  \App\Perjalanandns  $perjalanandns
      * @return \Illuminate\Http\Response
      */
-    public function show(Perjalanandns $perjalanandns)
+    public function show($id)
     {
-        $perjalanandns->makeHidden(['pegawaipdinas_id']);
+        $perjalanandns = Perjalanandns::find($id);
         return view('perjalanan/show', compact('perjalanandns'));
     }
 
@@ -94,10 +94,11 @@ class PerjalanandnsController extends Controller
      * @param  \App\Perjalanandns  $perjalanandns
      * @return \Illuminate\Http\Response
      */
-    public function edit(Perjalanandns $perjalanandns)
+    public function edit($id)
     {
+        $perjalanandns = Perjalanandns::find($id);
         $pegawais = Pegawai::all();
-        return view('perjalanan/edit', compact('perjalanandns'));
+        return view('perjalanan/edit', compact('perjalanandns', 'pegawais'));
     }
 
     /**
@@ -107,19 +108,19 @@ class PerjalanandnsController extends Controller
      * @param  \App\Perjalanandns  $perjalanandns
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Perjalanandns $perjalanandns)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'pegawaipdinas_id' => 'required',
             'tglsurat' => 'required',
             'no_surat' => 'required',
-            'perihal'=> 'required',
-            'tgl_berangkat'=> 'required',
-            'tgl_kembali'=> 'required',
-            'selama'=> 'required',
-            'tujuan'=> 'required',
-            'transportasi'=> 'required',
-            
+            'perihal' => 'required',
+            'tgl_berangkat' => 'required',
+            'tgl_kembali' => 'required',
+            'selama' => 'required',
+            'tujuan' => 'required',
+            'transportasi' => 'required',
+
         ], [
             'pegawaipdinas_id.required' => 'Pilihan tidak boleh kosong',
             'tglsurat.required' => 'Tanggal Surat tidak boleh kosong',
@@ -130,7 +131,7 @@ class PerjalanandnsController extends Controller
             'selama.required' => 'Cabang tidak boleh kosong',
             'tujuan.required' => 'Cabang tidak boleh kosong',
             'transportasi.required' => 'Cabang tidak boleh kosong'
-            
+
         ]);
         // $perjalanandns = new Perjalanandns;
         // $perjalanandns->pegawaipdinas_id = $request->pegawaipdinas_id;
@@ -144,7 +145,7 @@ class PerjalanandnsController extends Controller
         // $perjalanandns->transportasi = $request->transportasi;
         // $perjalanandns->save();
 
-        Perjalanandns::where('id', $perjalanandns->id)
+        Perjalanandns::where('id', $id)
             ->update([
                 'pegawaipdinas_id' => $request->pegawaipdinas_id,
                 'tglsurat' => $request->tglsurat,
@@ -155,7 +156,7 @@ class PerjalanandnsController extends Controller
                 'selama' => $request->selama,
                 'tujuan' => $request->tujuan,
                 'transportasi' => $request->transportasi,
-                
+
             ]);
         return redirect('perjalanan-dinas')->with('status', 'Data Pegawai Berhasil diupdate!');
     }
@@ -166,23 +167,23 @@ class PerjalanandnsController extends Controller
      * @param  \App\Perjalanandns  $perjalanandns
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Perjalanandns $perjalanandns)
+    public function destroy($id)
     {
-        $perjalanandns->delete();
-        return redirect('perjalanan-dinas')->with('status', 'Data Mengikuti Pelatihan telah berhasil dihapus permanen!'); 
+        Perjalanandns::destroy($id);
+        return redirect('perjalanan-dinas')->with('status', 'Data Mengikuti Pelatihan telah berhasil dihapus permanen!');
     }
 
     public function cetak()
     {
         $perjalanandns = Perjalanandns::all();
 
-        if(is_null($perjalanandns)){
+        if (is_null($perjalanandns)) {
             Session::flash("flash_message", [
                 "warna" => "alert-danger",
                 "message"   => "Data Kosong Tidak Bisa Dicetak"
             ]);
             return redirect()->back();
-        }else{
+        } else {
             $judul = "Laporan Perjalanan Dinas.pdf";
             $pdf = PDF::loadview('perjalanan/cetak', compact('perjalanandns'));
             $pdf->setPaper('F4', 'landscape');
@@ -190,16 +191,17 @@ class PerjalanandnsController extends Controller
         }
     }
 
-    public function cetakPeriode($tglawalpd, $tglakhirpd){
-        $perjalanandns = Perjalanandns::with('perjalanandns')->whereBetween('tglsurat',[$tglawalpd, $tglakhirpd])->latest()->get();
+    public function cetakPeriode($tglawalpd, $tglakhirpd)
+    {
+        $perjalanandns = Perjalanandns::with('perjalanandns')->whereBetween('tglsurat', [$tglawalpd, $tglakhirpd])->latest()->get();
 
-        if(is_null($perjalanandns)){
+        if (is_null($perjalanandns)) {
             Session::flash("flash_message", [
                 "warna" => "alert-danger",
                 "message"   => "Data Kosong Tidak Bisa Dicetak"
             ]);
             return redirect()->back();
-        }else{
+        } else {
             $judul = "Laporan Data Perjalanan Dinas.pdf";
             $pdf = PDF::loadview('perjalanan/cetakperiode', compact('perjalanandns'));
             $pdf->setPaper('F4', 'landscape');

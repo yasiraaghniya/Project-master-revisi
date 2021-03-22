@@ -128,7 +128,7 @@
                                 <a href="{{ url('perjalanan-dinas/' .$item->id) }}" class="btn btn-warning btn-sm">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                            <form action="" method="post" class="d-inline" onsubmit="return confirm('Yakin Ingin Menghapus Data?')">
+                            <form action="{{ url('perjalanan-dinas/' .$item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin Ingin Menghapus Data?')">
                             @method('delete')
                             @csrf
                             <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>

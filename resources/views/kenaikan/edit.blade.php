@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('title', 'Edit Data Kenaikan Gaji')
-    
+
 
 @section('breadcrumbs')
 <div class="breadcrumbs">
@@ -21,7 +21,7 @@
                 </ol>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 @endsection
 
@@ -34,108 +34,112 @@
                 <div class="pull-left">
                     <strong>Edit Data Kenaikan Gaji</strong>
                 </div>
-            <div class="pull-right">
-                <a href="{{ url('kenaikan-gaji') }}" class="btn btn-secondary btn-sm">
-                    <i class="fa fa-arrow-left"></i> Back
-                </a>
-            </div>
-        </div>
-        <div class="card-body">
-           
-            <div class="row">
-                <div class="col-md-12">
-                    <form action="{{ url('kenaikan-gaji/'.$kenaikangaji->id) }}" method="post">
-                        @method('PUT')
-                        @csrf
-                        
-                        <div class="form-group">
-                            <label>Tanggal Surat</label>
-                            <input type="date" name="tglsurat" class="form-control @error('tglsurat') 
-                            is-invalid @enderror" value="{{ old('tglsurat', $kenaikangaji->tglsurat) }}">
-                            @error('tglsurat')
-                            <div class="invalid-feedback">{{ $message }}</div>     
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>No. Surat</label>
-                            <input type="double" name="no_surat" class="form-control @error('no_surat') 
-                            is-invalid @enderror" value="{{ old('no_surat', $kenaikangaji->no_surat) }}">
-                            @error('no_surat')
-                            <div class="invalid-feedback">{{ $message }}</div>     
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>Nama Pegawai</label>
-                            <select name="pegawaikgaji_id" class="form-control @error('pegawaikgaji_id') 
-                            is-invalid @enderror">
-                                <option value="">Pilih Nama Pegawai</option>
-                                @foreach ($pegawais as $item)
-                                    <option value="{{ $item->id }}" {{ old('pegawaikgaji_id', $kenaikangaji->pegawaikgaji_id) == $item->id ? 'selected' : null }}>{{ $item->nama_pegawai}}</option>  
-                                @endforeach                                
-                            </select>
-                            @error('pegawaikgaji_id')
-                            <div class="invalid-feedback">{{ $message }}</div>     
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>NIP</label>
-                            <select name="pegawaikgaji_id" class="form-control @error('pegawaikgaji_id') 
-                            is-invalid @enderror">
-                                <option value="">Pilih NIP Pegawai</option>
-                                @foreach ($pegawais as $item)
-                                    <option value="{{ $item->id }}" {{ old('pegawaikgaji_id', $kenaikangaji->pegawaikgaji_id) == $item->id ? 'selected' : null }}>{{ $item->nip}}</option>  
-                                @endforeach                                
-                            </select>
-                            @error('pegawaikgaji_id')
-                            <div class="invalid-feedback">{{ $message }}</div>     
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>Gaji Pokok Lama</label>
-                            <input type="double" name="gajippk_lama" class="form-control @error('gajippk_lama') 
-                            is-invalid @enderror" value="{{ old('nama_kampus', $kenaikangaji->gajippk_lama) }}">
-                            @error('gajippk_lama')
-                            <div class="invalid-feedback">{{ $message }}</div>     
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>Gaji Pokok Baru</label>
-                            <input type="text" name="gajipkk_baru" class="form-control @error('gajipkk_baru') 
-                            is-invalid @enderror" value="{{ old('gajipkk_baru', $kenaikangaji->gajipkk_baru) }}">
-                            @error('gajipkk_baru')
-                            <div class="invalid-feedback">{{ $message }}</div>     
-                            @enderror
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Masa Kerja</label>
-                            <input type="text" name="masakerja" class="form-control @error('masakerja') 
-                            is-invalid @enderror" value="{{ old('masakerja', $izinbelajar->masakerja) }}">
-                            @error('masakerja')
-                            <div class="invalid-feedback">{{ $message }}</div>     
-                            @enderror
-                        </div>
-
-                        < class="form-group">
-                            <label>Tahun Kenaikan Gaji Selanjutnya</label>
-                            <input type="text" name="tahunkgs" class="form-control @error('tahunkgs') 
-                            is-invalid @enderror" value="{{ old('tahunkgs', $izinbelajar->tahunkgs) }}">
-                            @error('tahunkgs')
-                            <div class="invalid-feedback">{{ $message }}</div>     
-                            @enderror
-                    _id
-                        <button type="submit" class="btn btn-success"> Save</button>
-                    </form>
+                <div class="pull-right">
+                    <a href="{{ url('kenaikan-gaji') }}" class="btn btn-secondary btn-sm">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </a>
                 </div>
             </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="{{ url('kenaikan-gaji/'.$kenaikangaji->id) }}" method="post">
+                            @method('PUT')
+                            @csrf
+
+                            <div class="form-group">
+                                <label>Tanggal Surat</label>
+                                <input type="date" name="tglsurat" class="form-control @error('tglsurat') 
+                            is-invalid @enderror" value="{{ old('tglsurat', $kenaikangaji->tglsurat) }}">
+                                @error('tglsurat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label>No. Surat</label>
+                                <input type="double" name="no_surat" class="form-control @error('no_surat') 
+                            is-invalid @enderror" value="{{ old('no_surat', $kenaikangaji->no_surat) }}">
+                                @error('no_surat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nama Pegawai</label>
+                                <select name="pegawaikgaji_id" class="form-control @error('pegawaikgaji_id') 
+                            is-invalid @enderror">
+                                    <option value="">Pilih Nama Pegawai</option>
+                                    @foreach ($pegawais as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ old('pegawaikgaji_id', $kenaikangaji->pegawaikgaji_id) == $item->id ? 'selected' : null }}>
+                                        {{ $item->nama_pegawai}}</option>
+                                    @endforeach
+                                </select>
+                                @error('pegawaikgaji_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label>NIP</label>
+                                <select name="pegawaikgaji_id" class="form-control @error('pegawaikgaji_id') 
+                            is-invalid @enderror">
+                                    <option value="">Pilih NIP Pegawai</option>
+                                    @foreach ($pegawais as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ old('pegawaikgaji_id', $kenaikangaji->pegawaikgaji_id) == $item->id ? 'selected' : null }}>
+                                        {{ $item->nip}}</option>
+                                    @endforeach
+                                </select>
+                                @error('pegawaikgaji_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label>Gaji Pokok Lama</label>
+                                <input type="text" name="gajipkk_lama" class="form-control @error('gajippk_lama') 
+                            is-invalid @enderror" value="{{ old('gajipkk_baru', $kenaikangaji->gajipkk_lama) }}">
+                                @error('gajippk_lama')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label>Gaji Pokok Baru</label>
+                                <input type="text" name="gajipkk_baru" class="form-control @error('gajipkk_baru') 
+                            is-invalid @enderror" value="{{ old('gajipkk_baru', $kenaikangaji->gajipkk_baru) }}">
+                                @error('gajipkk_baru')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label>Masa Kerja</label>
+                                <input type="text" name="masakerja" class="form-control @error('masakerja') 
+                            is-invalid @enderror" value="{{ old('masakerja', $kenaikangaji->masakerja) }}">
+                                @error('masakerja')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tahun Kenaikan Gaji Selanjutnya</label>
+                                <input type="text" name="tahunkgs" class="form-control @error('tahunkgs') 
+                            is-invalid @enderror" value="{{ old('tahunkgs', $kenaikangaji->tahunkgs) }}">
+                                @error('tahunkgs')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+
+                                <button type="submit" class="btn btn-success"> Save</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
-        
     </div>
-</div>
-@endsection
+    @endsection

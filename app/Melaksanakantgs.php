@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Melaksanakantgs extends Model
 {
     protected $table = 'tb_melaksanakantgs';
+    protected $guarded = [];
 
     public function pegawaitgs()
     {
