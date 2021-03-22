@@ -39,27 +39,28 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="label">Tanggal Awal</label>
-                    <input type="date" name="tglawalmp" id="tglawalmp" class="form-control">
+            <form action="/cetak-periode-mengikuti-pelatihan" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="label">Tanggal Awal</label>
+                        <input type="date" name="date1" id="tglawalmp" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="label">Tanggal Akhir</label>
+                        <input type="date" name="date2" id="tglakhirmp" class="form-control">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="label">Tanggal Akhir</label>
-                    <input type="date" name="tglakhirmp" id="tglakhirmp" class="form-control">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="form-group">
-                    <a href="" onclick="this.href='/cetak-periode-mengikuti-pelatihan/'+ document.getElementById('tglawalmp').value +
-                    '/' + document.getElementById('tglakhirmp').value " target="_blank" class="btn btn-primary">
-                        <i class="fa fa-print"></i> Print
-                    </a>
-                </div>
-                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Cetak</button>
+                    </div>
+                    {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button> --}}
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

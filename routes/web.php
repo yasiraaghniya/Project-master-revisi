@@ -21,15 +21,15 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/new-login', function(){
+Route::get('/new-login', function () {
     return view('newLogin');
 });
 
-Route::get('/new-register', function(){
+Route::get('/new-register', function () {
     return view('newRegister');
 });
 
-Route::get('/new-forget', function(){
+Route::get('/new-forget', function () {
     return view('newForget');
 });
 
@@ -52,36 +52,35 @@ Auth::routes();
 //Pegawai
 Route::get('datapegawai/delete/{id?}', 'PegawaiController@delete');
 Route::get('/datapegawai/cetak', 'PegawaiController@cetak')->name('datapegawai/cetak');
-Route::get('/cetak-filter/{kantor}','PegawaiController@cetakFilter')->name('cetak-filter');
+Route::get('/cetak-filter/{kantor}', 'PegawaiController@cetakFilter')->name('cetak-filter');
 Route::resource('datapegawai', 'PegawaiController');
 
 
 //Kenaikan Gaji
 Route::get('kenaikan-gaji/delete/{id?}', 'KenaikangajiController@delete');
 Route::get('/kenaikan-gaji/cetak', 'KenaikangajiController@cetak')->name('kenaikan-gaji/cetak');
-Route::get('kenaikan-gaji/edit/{id}','KenaikangajiController@edit');
+Route::get('kenaikan-gaji/edit/{id}', 'KenaikangajiController@edit');
 // Route::get('/cetak-filter/{kantor}','KenaikangajiController@cetakFilter')->name('cetak-filter');
 Route::resource('kenaikan-gaji', 'KenaikangajiController');
 
 //Melaksanakan Tugas
 Route::get('melaksanakan-tugas/delete/{id?}', 'MelaksanakantgsController@delete');
 Route::get('/melaksanakan-tugas/cetak', 'MelaksanakantgsController@cetak')->name('melakasanakan-tugas/cetak');
-Route::get('melaksanakan-tugas/edit/{id}','MelaksanakantgsController@edit');
-Route::get('/cetak-periode-melaksanakantgs/{tglawalmt}/{tglakhirmt}','MelaksanakantgsController@cetakPeriode')->name('cetak-periode-melaksanakantgs');
+Route::get('melaksanakan-tugas/edit/{id}', 'MelaksanakantgsController@edit');
+Route::post('/cetak-periode-melaksanakantgs', 'MelaksanakantgsController@cetakPeriode')->name('cetak-periode-melaksanakantgs');
 Route::resource('melaksanakan-tugas', 'MelaksanakantgsController');
 
 //Perjalanan
 Route::get('perjalanan-dinas/delete/{id?}', 'PerjalanandnsController@delete');
 Route::get('/perjalanan-dinas/cetak', 'PerjalanandnsController@cetak')->name('perjalanan-dinas/cetak');
-Route::get('perjalanan-dinas/edit/{id}','PerjalanandnsController@edit');
-Route::get('/cetak-periode-perjalanandns/{tglawalpd}/{tglakhirpd}','PerjalanandnsController@cetakPeriode')->name('cetak-periode-perjalanandns');
+Route::get('perjalanan-dinas/edit/{id}', 'PerjalanandnsController@edit');
+Route::get('/cetak-periode-perjalanandns/{tglawalpd}/{tglakhirpd}', 'PerjalanandnsController@cetakPeriode')->name('cetak-periode-perjalanandns');
 // Route::get('/cetak-filter/{kantor}','KenaikangajiController@cetakFilter')->name('cetak-filter');
 Route::resource('/perjalanan-dinas', 'PerjalanandnsController');
 
 //Mengikuti
 Route::get('mengikuti-pelatihan/delete/{id?}', 'MengikutiplthController@delete');
 Route::get('/mengikuti-pelatihan/cetak', 'MengikutiplthController@cetak')->name('mengikuti-pelatihan/cetak');
-Route::post('mengikuti-pelatihan/edit/{id}','MengikutiplthController@edit');
-Route::get('/cetak-periode-mengikuti-pelatihan/{tglawalmp}/{tglakhirmp}','MengikutiplthController@cetakPeriode')->name('cetak-periode-mengikutiplth');
+Route::post('mengikuti-pelatihan/edit/{id}', 'MengikutiplthController@edit');
+Route::post('/cetak-periode-mengikuti-pelatihan', 'MengikutiplthController@cetakPeriode')->name('cetak-periode-mengikutiplth');
 Route::resource('mengikuti-pelatihan', 'MengikutiplthController');
-
