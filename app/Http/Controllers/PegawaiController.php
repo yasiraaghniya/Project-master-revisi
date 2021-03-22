@@ -93,8 +93,9 @@ class PegawaiController extends Controller
      */
     public function show(Pegawai $datapegawai)
     {
-          return view('pegawai/show_data', compact('datapegawai'));
+        return view('pegawai/show', compact('datapegawai'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

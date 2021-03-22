@@ -17,7 +17,7 @@ class CreateTbPerjalanandinasTable extends Migration
             $table->id();
             $table->foreignId('pegawaipdinas_id')->constrained('tbpegawais')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tglsurat');
-            $table->double('no_surat');
+            $table->string('no_surat');
             $table->string('perihal', 100);
             $table->date('tgl_berangkat');
             $table->date('tgl_kembali');

@@ -1,22 +1,22 @@
 @extends('main')
 
-@section('title', 'Program')
+@section('title', 'Detail Data Pegawai')
 
 @section('breadcrums')
 <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Program</h1>
-                    </div>
+                    {{-- <div class="page-title">
+                        <h1>Pegawai</h1>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-sm-8">
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="#">Program</a></li>
                             <li><a href="#">Data</a></li>
+                            {{-- <li><a href="#">Data</a></li> --}}
                             <li class="active">Detail</li>
                         </ol>
                     </div>
@@ -39,7 +39,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="pull-left">
-                            <strong>Detail Program</strong>
+                            <strong>Detail Data Pegawai</strong>
                         </div>
                         <div class="pull-right">
                             <a href="{{ url('datapegawai')}}" class="btn btn-secondary btn-sm">
@@ -81,7 +81,7 @@
                                         </tr>
                                         <tr>
                                             <th>No. Hp</th>
-                                            <td>{{ $datapegawai->hp }}</td>
+                                            <td>0{{ $datapegawai->hp }}</td>
                                         </tr>
                                         <tr>
                                             <th>Pangkat</th>

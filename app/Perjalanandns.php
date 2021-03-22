@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Perjalanandns extends Model
 {
     protected $table = 'tb_perjalanandinas';
-    public function pegawaiperjalanandns()
+    public function pegawaipdinas()
     {
         return $this ->belongsTo('App\Pegawai');
     } 

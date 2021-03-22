@@ -11,7 +11,7 @@ class Kenaikangaji extends Model
     // protected $fillable = ['pegawaikgaji_id, tglsurat, no_surat, gajipkk_lama, gajipkk_baru, masakerja, tahunkgs'];
     protected $hidden = ['created_at', 'updated_at'];
     
-    public function pegawaikenaikangaji()
+    public function pegawaikgaji()
     {
         return $this->belongsTo('App\Pegawai');
     } 

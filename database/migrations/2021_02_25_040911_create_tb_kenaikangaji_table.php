@@ -17,7 +17,7 @@ class CreateTbKenaikangajiTable extends Migration
             $table->id();
             $table->foreignId('pegawaikgaji_id')->constrained('tbpegawais')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tglsurat');
-            $table->double('no_surat');
+            $table->string('no_surat');
             $table->double('gajipkk_lama');
             $table->double('gajipkk_baru');
             $table->string('masakerja', 50);

@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Tambah Data Mengikuti Pelatihan')
+@section('title', 'Tambah Data Perjalanan Dinas')
     
 
 @section('breadcrumbs')
@@ -16,7 +16,7 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    <li><a href="#">Data Mengikuti Pelatihan</a></li>
+                    <li><a href="#">Data Perjalanan Dinas</a></li>
                     <li class="active">Add</li>
                 </ol>
             </div>
@@ -32,10 +32,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="pull-left">
-                    <strong>Tambah Data Mengikuti Pelatihan</strong>
+                    <strong>Tambah Data Perjalanan Dinas</strong>
                 </div>
             <div class="pull-right">
-                <a href="{{ url('mengikuti-pelatihan') }}" class="btn btn-secondary btn-sm">
+                <a href="{{ url('perjalanan-dinas') }}" class="btn btn-secondary btn-sm">
                     <i class="fa fa-arrow-left"></i> Back
                 </a>
             </div>
@@ -44,7 +44,7 @@
            
             <div class="row">
                 <div class="col-md-12">
-                    <form action="{{ url('mengikuti-pelatihan') }}" method="post">
+                    <form action="{{ url('perjalanan-dinas') }}" method="post">
                         @csrf
 
                         <div class="form-group">
@@ -67,55 +67,82 @@
 
                         <div class="form-group">
                             <label>Nama Pegawai</label>
-                            <select name="pegawaiplth_id" class="form-control @error('pegawaiplth_id') 
+                            <select name="pegawaipdinas_id" class="form-control @error('pegawaipdinas_id') 
                             is-invalid @enderror">
                                 <option value="">Pilih Nama Pegawai</option>
                                 @foreach ($pegawais as $item)
-                                    <option value="{{ $item->id }}" {{ old('pegawaiplth_id') == $item->id ? 'selected' : null }}>{{ $item->nama_pegawai}}</option>  
+                                    <option value="{{ $item->id }}" {{ old('pegawaipdinas_id') == $item->id ? 'selected' : null }}>{{ $item->nama_pegawai}}</option>  
                                 @endforeach                                
                             </select>
-                            @error('pegawaiplth_id')
+                            @error('pegawaipdinas_id')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label>NIP</label>
-                            <select name="pegawaiplth_id" class="form-control @error('pegawaiplth_id') 
+                            <select name="pegawaipdinas_id" class="form-control @error('pegawaipdinas_id') 
                             is-invalid @enderror">
                                 <option value="">Pilih NIP Pegawai</option>
                                 @foreach ($pegawais as $item)
-                                    <option value="{{ $item->id }}" {{ old('pegawaiplth_id') == $item->id ? 'selected' : null }}>{{ $item->nip}}</option>  
+                                    <option value="{{ $item->id }}" {{ old('pegawaipdinas_id') == $item->id ? 'selected' : null }}>{{ $item->nip}}</option>  
                                 @endforeach                                
                             </select>
-                            @error('pegawaiplth_id')
+                            @error('pegawaipdinas_id')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label>Pelatihan</label>
-                            <input type="text" name="nama_plth" class="form-control @error('nama_plth') 
-                            is-invalid @enderror" value="{{ old('nama_plth') }}">
-                            @error('nama_plth')
+                            <label>Perihal</label>
+                            <input type="text" name="perihal" class="form-control @error('perihal') 
+                            is-invalid @enderror" value="{{ old('perihal') }}">
+                            @error('perihal')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label>Tanggal Pelatihan</label>
-                            <input type="date" name="tgl_plth" class="form-control @error('tgl_plth') 
-                            is-invalid @enderror" value="{{ old('tgl_plth') }}">
-                            @error('tgl_plth')
+                            <label>Tanggal Berangkat</label>
+                            <input type="date" name="tgl_berangkat" class="form-control @error('tgl_berangkat') 
+                            is-invalid @enderror" value="{{ old('tgl_berangkat') }}">
+                            @error('tgl_berangkat')
+                            <div class="invalid-feedback">{{ $message }}</div>     
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tanggal Kembali</label>
+                            <input type="date" name="tgl_kembali" class="form-control @error('tgl_kembali') 
+                            is-invalid @enderror" value="{{ old('tgl_kembali') }}">
+                            @error('tgl_kembali')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
                         
                         <div class="form-group">
-                            <label>Tempat Pelatihan</label>
-                            <input type="text" name="tmpt_plth" class="form-control @error('tmpt_plth') 
-                            is-invalid @enderror" value="{{ old('tmpt_plth') }}">
-                            @error('tmpt_plth')
+                            <label>Selama</label>
+                            <input type="text" name="selama" class="form-control @error('selama') 
+                            is-invalid @enderror" value="{{ old('selama') }}">
+                            @error('selama')
+                            <div class="invalid-feedback">{{ $message }}</div>     
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tujuan</label>
+                            <input type="text" name="tujuan" class="form-control @error('tujuan') 
+                            is-invalid @enderror" value="{{ old('tujuan') }}">
+                            @error('tujuan')
+                            <div class="invalid-feedback">{{ $message }}</div>     
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Transportasi</label>
+                            <input type="text" name="transportasi" class="form-control @error('transportasi') 
+                            is-invalid @enderror" value="{{ old('transportasi') }}">
+                            @error('transportasi')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>

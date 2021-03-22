@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cetak Data Pegawai</title>
+<title>Cetak Data Kenaikan Gaji</title>
 <style>
   
 .tdth {
@@ -84,7 +84,7 @@ tr:nth-child(even) {
     <tr style="background-color: white">
       <td class="tdth">Filter</td>
       <td class="tdth">:</td>
-      <td class="tdth">Kantor</td>
+      <td class="tdth">Periode</td>
       <td class="tdth"></td>
       <td class="tdth"></td>
       <td class="tdth"></td>
@@ -100,41 +100,33 @@ tr:nth-child(even) {
     </tr> --}}
   </tbody>
 </table>
-
-<p class="font">LAPORAN DATA PEGAWAI</p>
+<br><br>
+<p class="font">LAPORAN KENAIKAN GAJI</p>
 
 <table class="size">
   <tr>
     <th class="align">No</th>
+    <th class="align">Tanggal Surat</th>
+    <th class="align">No. Surat</th>
     <th class="align">NIP</th>
     <th class="align">Nama Pegawai</th>
-    <th class="align">NRP</th>
-    <th class="align">Tempat Lahir</th>
-    <th class="align">Tanggal Lahir</th>
-    <th class="align">Alamat</th>
-    <th class="align">No. Hp</th>
-    <th class="align">Pangkat</th>
-    <th class="align">Golongan</th>
-    <th class="align">Jabatan</th>
-    <th class="align">Unit/Bagian</th>
-    <th class="align">Kantor</th>
+    <th class="align">Gaji Pokok Lama</th>
+    <th class="align">Gaji Pokok Baru</th>
+    <th class="align">Masa Kerja</th>
+    <th class="align">Tahun Kenaikan Gaji Selanjutnya</th>
   </tr>
   @php $no=1; @endphp
-  @foreach ($datapegawai as $item)
+  @foreach ($kenaikangaji as $item)
   <tr>
     <td class="align">{{ $no++ }}</td>
-    <td class="align">{{ $item->nip }}</td>
-    <td>{{ $item->nama_pegawai }}</td>
-    <td class="align">{{ $item->nrp }}</td>
-    <td class="align">{{ $item->tempatlhr }}</td>
-    <td class="align">{{ $item->tgllahir }}</td>
-    <td>{{ $item->alamat }}</td>
-    <td class="align">0{{ $item->hp }}</td>
-    <td class="align">{{ $item->pangkat }}</td>
-    <td class="align">{{ $item->golongan}}</td>
-    <td class="align">{{ $item->jabatan }}</td>
-    <td class="align">{{ $item->bagian }}</td>
-    <td class="align">{{ $item->kanwil }}</td>
+    <td class="align">{{ $item->tglsurat }}</td>
+    <td class="align">{{ $item->no_surat }}</td>
+    <td class="align">{{ $item->pegawaikgaji->nip }}</td>
+    <td class="align">{{ $item->pegawaikgaji->nama_pegawai }}</td>
+    <td class="align">{{ $item->gajipkk_lama }}</td>
+    <td class="align">{{ $item->gajipkk_baru }}</td>
+    <td class="align">{{ $item->masakerja }}</td>
+    <td class="align">{{ $item->tahunkgs }}</td>
   </tr>
   @endforeach
 </table>

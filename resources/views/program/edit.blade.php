@@ -54,7 +54,8 @@
                                         @error('name')
                                         <div class="invalid-feedback"> {{ $message }} </div>
                                         @enderror
-                                    </div><div class="form-group">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Jenjang</label>
                                         <select name="edulevel_id" class="form-control @error('edulevel_id') 
                                         is-invalid @enderror">

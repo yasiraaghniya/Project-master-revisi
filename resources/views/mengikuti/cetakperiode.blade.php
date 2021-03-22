@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cetak Data Pegawai</title>
+  <title>Cetak Filter Data Mengikuti Pelatihan</title>
 <style>
   
 .tdth {
@@ -30,10 +30,6 @@ tr:nth-child(even) {
   text-align: center;
 }
 
-.right{
-  text-align: right;
-}
-
 .font
 {
   font-family: arial, sans-serif;
@@ -44,6 +40,10 @@ tr:nth-child(even) {
 
 .size{
   font-size:11pt;
+}
+
+.size2{
+  font-size: 9pt;
 }
 
 </style>
@@ -85,15 +85,13 @@ tr:nth-child(even) {
       <td class="tdth">Filter</td>
       <td class="tdth">:</td>
       <td class="tdth">Kantor</td>
-      <td class="tdth"></td>
-      <td class="tdth"></td>
-      <td class="tdth"></td>
+
     </tr>
 
     {{-- <tr>
       <td class="tdth">Filter</td>
       <td class="tdth">:</td>
-      <td class="tdth">-</td>
+      <td class="tdth">Pangkat</td>
       <td class="tdth"></td>
       <td class="tdth"></td>
       <td class="tdth"></td>
@@ -101,44 +99,47 @@ tr:nth-child(even) {
   </tbody>
 </table>
 
-<p class="font">LAPORAN DATA PEGAWAI</p>
+<p class="font">LAPORAN MENGIKUTI PELATIHAN</p>
 
 <table class="size">
   <tr>
     <th class="align">No</th>
     <th class="align">NIP</th>
     <th class="align">Nama Pegawai</th>
-    <th class="align">NRP</th>
-    <th class="align">Tempat Lahir</th>
-    <th class="align">Tanggal Lahir</th>
-    <th class="align">Alamat</th>
-    <th class="align">No. Hp</th>
-    <th class="align">Pangkat</th>
-    <th class="align">Golongan</th>
-    <th class="align">Jabatan</th>
-    <th class="align">Unit/Bagian</th>
-    <th class="align">Kantor</th>
+    <th class="align">Pelatihan</th>
+    <th class="align">Tanggal Pelatihan</th>
+    <th class="align">Tempat Pelatihan</th>
   </tr>
   @php $no=1; @endphp
-  @foreach ($datapegawai as $item)
+  @foreach ($mengikutiplth as $item)
   <tr>
     <td class="align">{{ $no++ }}</td>
-    <td class="align">{{ $item->nip }}</td>
-    <td>{{ $item->nama_pegawai }}</td>
-    <td class="align">{{ $item->nrp }}</td>
-    <td class="align">{{ $item->tempatlhr }}</td>
-    <td class="align">{{ $item->tgllahir }}</td>
-    <td>{{ $item->alamat }}</td>
-    <td class="align">0{{ $item->hp }}</td>
-    <td class="align">{{ $item->pangkat }}</td>
-    <td class="align">{{ $item->golongan}}</td>
-    <td class="align">{{ $item->jabatan }}</td>
-    <td class="align">{{ $item->bagian }}</td>
-    <td class="align">{{ $item->kanwil }}</td>
+    <td class="align">{{ $item->pegawaiplth->nip }}</td>
+    <td>{{ $item->pegawaiplth->nama_pegawai }}</td>
+    <td class="align">{{ $item->nama_plth }}</td>
+    <td class="align">{{ $item->tgl_plth }}</td>
+    <td class="align">{{ $item->tmpt_plth }}</td>
   </tr>
   @endforeach
 </table>
 <br><br>
+
+{{-- <table width="100%">
+  <tbody>
+    <tr>
+      <td class="tdth" width="50%"></td>
+      <td class="align tdth">
+        <font size="10pt">Banjarmasin, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ Carbon\Carbon::parse()->translatedFormat('F Y') }}<br><br>
+          <b>KEPALA KEJAKSAAN TINGGI KALIMANTAN SELATAN</b></u>
+          <br><br><br><br><br>
+          <b><u>ARIE ARIFIN, SH., MH</b></u><br>Jaksa Utama Madya NIP. 19601201 198503 1 004
+        </font>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html> --}}
 
 <table border="0">
   <tbody>
@@ -150,12 +151,12 @@ tr:nth-child(even) {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
       </td>
       <td class="align tdth">
         <font size="10pt">Banjarmasin, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ Carbon\Carbon::parse()->translatedFormat('F Y') }}<br><br>
           <b>KEPALA KEJAKSAAN TINGGI KALIMANTAN SELATAN</b></u>
-          <br><br><br><br><br>
+          <br><br><br><br>
           <b><u>ARIE ARIFIN, SH., MH</b></u><br>Jaksa Utama Madya NIP. 19601201 198503 1 004
         </font>
       </td>

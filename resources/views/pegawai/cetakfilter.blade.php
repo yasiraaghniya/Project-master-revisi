@@ -84,10 +84,8 @@ tr:nth-child(even) {
     <tr style="background-color: white">
       <td class="tdth">Filter</td>
       <td class="tdth">:</td>
-      <td class="tdth">Kantor</td>
-      <td class="tdth"></td>
-      <td class="tdth"></td>
-      <td class="tdth"></td>
+      <td class="tdth">Kantor Wilayah</td>
+
     </tr>
 
     {{-- <tr>
@@ -100,7 +98,8 @@ tr:nth-child(even) {
     </tr> --}}
   </tbody>
 </table>
-<br><br>
+
+
 <p class="font">LAPORAN DATA PEGAWAI</p>
 
 <table class="size2">
@@ -126,7 +125,7 @@ tr:nth-child(even) {
     <td class="align">{{ $item->nip }}</td>
     <td class="align">{{ $item->nama_pegawai }}</td>
     <td class="align">{{ $item->nrp }}</td>
-    <td class="align">{{ $item->tempatlahir }}</td>
+    <td class="align">{{ $item->tempatlhr }}</td>
     <td class="align">{{ $item->tgllahir }}</td>
     <td class="align">{{ $item->alamat }}</td>
     <td class="align">0{{ $item->hp }}</td>
@@ -167,12 +166,12 @@ tr:nth-child(even) {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
       </td>
       <td class="align tdth">
         <font size="10pt">Banjarmasin, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ Carbon\Carbon::parse()->translatedFormat('F Y') }}<br><br>
           <b>KEPALA KEJAKSAAN TINGGI KALIMANTAN SELATAN</b></u>
-          <br><br><br><br><br>
+          <br><br><br><br>
           <b><u>ARIE ARIFIN, SH., MH</b></u><br>Jaksa Utama Madya NIP. 19601201 198503 1 004
         </font>
       </td>

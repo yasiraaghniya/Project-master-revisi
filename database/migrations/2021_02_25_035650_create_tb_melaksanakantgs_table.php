@@ -17,7 +17,7 @@ class CreateTbMelaksanakantgsTable extends Migration
             $table->id();
             $table->foreignId('pegawaitgs_id')->constrained('tbpegawais')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tglsurat');
-            $table->double('no_surat');
+            $table->string('no_surat');
             $table->string('nama_tgs', 100);
             $table->string('tmpt_tgs', 100);
             $table->date('tmt');

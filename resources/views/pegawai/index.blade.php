@@ -45,7 +45,7 @@
                 <input type="text" name="kanwil" id="kanwil" class="form-control">
             </div>
         </div>
-
+       
         <div class="modal-footer">
             <div class="form-group">
                 <a href=""  onclick="this.href='/cetak-filter/'+ document.getElementById('kanwil').value 
@@ -71,9 +71,6 @@
                     <strong>Data Pegawai</strong>
                 </div>
                 <div class="pull-right">
-                    <input value="{{Request::get('keyword')}}" type="text" class="form-control"  name="keyword" placeholder="Search">
-                            <button class="btn btn-primary btn-sm"><i class="fa fa-search"></i>Search</button>
-
                     <a href="{{ url('datapegawai/create') }}" class="btn btn-success btn-sm">
                         <i class="fa fa-plus"></i> Add
                     </a>
@@ -109,11 +106,12 @@
                     <th>Kantor</th>
                     <th>Action</th>
                 </tr>
+                </font>
             </thead>
             <tbody>
                 @if ($datapegawai->count() > 0)
                 @foreach ($datapegawai as $key => $item)
-                <tr>
+                <tr align="left">
                     <td>{{ $datapegawai->firstItem() + $key }}</td>
                     <td>{{ $item->nama_pegawai }}</td>
                     <td>{{ $item->nip }}</td>
@@ -128,19 +126,11 @@
                     <td>{{ $item->bagian }}</td> 
                     <td>{{ $item->kanwil }}</td>
                     
-                    {{-- <td class="text-center">
-                        <a href="{{ url('storage/'.$item->file) }}" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o"></i></a>
-                    </td> --}}
-                    
                     <td class="text-center">
-                        {{-- @if (auth()->user()->level=="Admin") --}}
+                        {{-- @if (auth()->user()->level=="Admin")
                         
                         {{-- @endif --}}
-                        
-                    
-                                  
-                            
-                    
+            
                         <a href="{{ url('datapegawai/' .$item->id. '/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                         <a href="{{ url('datapegawai/' .$item->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>
                         <form action="{{ url('datapegawai/' .$item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin Ingin Menghapus Data?')">

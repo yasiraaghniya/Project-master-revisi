@@ -17,7 +17,7 @@ class CreateTbMengikutiplthTable extends Migration
             $table->id();
             $table->foreignId('pegawaiplth_id')->constrained('tbpegawais')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tglsurat');
-            $table->double('no_surat');
+            $table->string('no_surat');
             $table->string('nama_plth', 100);
             $table->date('tgl_plth');
             $table->string('tmpt_plth', 100);

@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Tambah Data Mengikuti Pelatihan')
+@section('title', 'Tambah Data Melaksanakan Tugas')
     
 
 @section('breadcrumbs')
@@ -16,7 +16,7 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    <li><a href="#">Data Mengikuti Pelatihan</a></li>
+                    <li><a href="#">Data Melaksanakan Tugas</a></li>
                     <li class="active">Add</li>
                 </ol>
             </div>
@@ -32,10 +32,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="pull-left">
-                    <strong>Tambah Data Mengikuti Pelatihan</strong>
+                    <strong>Tambah Data Melaksanakan Tugas </strong>
                 </div>
             <div class="pull-right">
-                <a href="{{ url('mengikuti-pelatihan') }}" class="btn btn-secondary btn-sm">
+                <a href="{{ url('melaksanakan-tugas') }}" class="btn btn-secondary btn-sm">
                     <i class="fa fa-arrow-left"></i> Back
                 </a>
             </div>
@@ -44,7 +44,7 @@
            
             <div class="row">
                 <div class="col-md-12">
-                    <form action="{{ url('mengikuti-pelatihan') }}" method="post">
+                    <form action="{{ url('melaksanakan-tugas') }}" method="post">
                         @csrf
 
                         <div class="form-group">
@@ -67,58 +67,59 @@
 
                         <div class="form-group">
                             <label>Nama Pegawai</label>
-                            <select name="pegawaiplth_id" class="form-control @error('pegawaiplth_id') 
+                            <select name="pegawaitgs_id" class="form-control @error('pegawaitgs_id') 
                             is-invalid @enderror">
                                 <option value="">Pilih Nama Pegawai</option>
                                 @foreach ($pegawais as $item)
-                                    <option value="{{ $item->id }}" {{ old('pegawaiplth_id') == $item->id ? 'selected' : null }}>{{ $item->nama_pegawai}}</option>  
+                                    <option value="{{ $item->id }}" {{ old('pegawaitgs_id') == $item->id ? 'selected' : null }}>{{ $item->nama_pegawai}}</option>  
                                 @endforeach                                
                             </select>
-                            @error('pegawaiplth_id')
+                            @error('pegawaitgs_id')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label>NIP</label>
-                            <select name="pegawaiplth_id" class="form-control @error('pegawaiplth_id') 
+                            <select name="pegawaitgs_id" class="form-control @error('pegawaitgs_id') 
                             is-invalid @enderror">
                                 <option value="">Pilih NIP Pegawai</option>
                                 @foreach ($pegawais as $item)
-                                    <option value="{{ $item->id }}" {{ old('pegawaiplth_id') == $item->id ? 'selected' : null }}>{{ $item->nip}}</option>  
+                                    <option value="{{ $item->id }}" {{ old('pegawaitgs_id') == $item->id ? 'selected' : null }}>{{ $item->nip}}</option>  
                                 @endforeach                                
                             </select>
-                            @error('pegawaiplth_id')
+                            @error('pegawaitgs_id')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label>Pelatihan</label>
-                            <input type="text" name="nama_plth" class="form-control @error('nama_plth') 
-                            is-invalid @enderror" value="{{ old('nama_plth') }}">
-                            @error('nama_plth')
+                            <label>Tugas</label>
+                            <input type="text" name="nama_tugas" class="form-control @error('nama_tugas') 
+                            is-invalid @enderror" value="{{ old('nama_tugas') }}">
+                            @error('nama_tugas')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label>Tanggal Pelatihan</label>
-                            <input type="date" name="tgl_plth" class="form-control @error('tgl_plth') 
-                            is-invalid @enderror" value="{{ old('tgl_plth') }}">
-                            @error('tgl_plth')
+                            <label>Tempat Penugasan</label>
+                            <input type="text" name="tmpt_tgs" class="form-control @error('tmpt_tgs') 
+                            is-invalid @enderror" value="{{ old('tmpt_tgs') }}">
+                            @error('tmpt_tgs')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
                         
                         <div class="form-group">
-                            <label>Tempat Pelatihan</label>
-                            <input type="text" name="tmpt_plth" class="form-control @error('tmpt_plth') 
-                            is-invalid @enderror" value="{{ old('tmpt_plth') }}">
-                            @error('tmpt_plth')
+                            <label>TMT</label>
+                            <input type="date" name="tmt" class="form-control @error('tmt') 
+                            is-invalid @enderror" value="{{ old('tmt') }}">
+                            @error('tmt')
                             <div class="invalid-feedback">{{ $message }}</div>     
                             @enderror
                         </div>
+
                         <button type="submit" class="btn btn-success">Save</button>
                     </form>
                 </div>

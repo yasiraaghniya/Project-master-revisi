@@ -56,7 +56,7 @@
                         
                     </li>
                     <li>
-                        <a href="{{ url('new-register') }}"><i class="menu-icon fa fa-registered"></i>Register</a>
+                        <a href="{{ url('new-register') }}"><i class="menu-icon fa fa-user"></i>Register</a>
                     </li>
                     <li>
                         <a href="{{ url('new-login') }}"><i class="menu-icon fa fa-sign-in"></i>Login</a>

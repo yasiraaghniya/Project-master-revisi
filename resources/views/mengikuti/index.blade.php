@@ -28,34 +28,42 @@
 
 @section('content')
 
-<!-- Modal Cetak -->
-{{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cetak Data Berdasarkan Kantor</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cetak Data Berdasarkan Periode</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-
         <div class="modal-body">
-            <div class="form-group">
-                <label for="label">Kantor</label>
-                <input type="text" name="kanwil" id="kanwil" class="form-control">
-            </div>
+                <div class="form-group">
+                    <label for="label">Tanggal Awal</label>
+                    <input type="date" name="tglawalmp" id="tglawalmp" class="form-control">
+                </div>
+    
+                <div class="form-group">
+                    <label for="label">Tanggal Akhir</label>
+                    <input type="date" name="tglakhirmp" id="tglakhirmp" class="form-control">
+                </div> 
         </div>
-
         <div class="modal-footer">
             <div class="form-group">
-                <a href=""  onclick="this.href='/cetak-filter/'+ document.getElementById('kanwil').value 
-                "target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print
-                </a>
+                <a href=""  onclick="this.href='/cetak-periode-mengikuti-pelatihan/'+ document.getElementById('tglawalmp').value +
+                    '/' + document.getElementById('tglakhirmp').value "target="_blank" class="btn btn-primary">
+                    <i class="fa fa-print"></i> Print
+                   </a>
             </div>
+          {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button> --}}
         </div>
+      </div>
     </div>
-</div>
-</div> --}}
+  </div>
+
+        
 
 <div class="content mt-3">
     <div class="animated fadeIn">
@@ -68,11 +76,9 @@
             <div class="card">
                 <div class="card-header">
                 <div class="pull-left">
-                    <strong>Mengikuti Pelatihan</strong>
+                    <strong>Data Mengikuti Pelatihan</strong>
                 </div>
                 <div class="pull-right">
-                    <input value="{{Request::get('keyword')}}" type="text" class="form-control"  name="keyword" placeholder="Search">
-                            <button class="btn btn-primary btn-sm"><i class="fa fa-search"></i>Search</button>
 
                     <a href="{{ url('mengikuti-pelatihan/create') }}" class="btn btn-success btn-sm">
                         <i class="fa fa-plus"></i> Add
@@ -82,10 +88,6 @@
                         <i class="fa fa-print"></i>
                         Print
                     </button>
-{{-- 
-                    <a href="{{ url('datapegawai/trash') }}" class="btn btn-danger btn-sm">
-                        <i class="fa fa-trash"></i> Trash
-                    </a> --}}
             </div>
         </form>
     </div>
@@ -99,7 +101,8 @@
                     <th>NIP</th>
                     <th>Tanggal Surat</th>
                     <th>No. Surat</th>
-                    <th>Nama Pelatihan</th>
+                    <th>Pelatihan</th>
+                    <th>Tanggal Pelatihan</th>
                     <th>Tempat Pelatihan</th>
                     <th>Action</th>
                 </tr>
@@ -107,34 +110,30 @@
             <tbody>
                 @if ($mengikutiplth->count() > 0)
                 @foreach ($mengikutiplth as $key => $item)
-                <tr>
+                <tr align="left">
                     <td>{{ $mengikutiplth->firstItem() + $key }}</td>
-                    <td>{{ $item->datapegawai->nama_pegawai }}</td>
-                    <td>{{ $item->datapegawai->nip }}</td>
+                    <td>{{ $item->pegawaiplth->nama_pegawai }}</td>
+                    <td>{{ $item->pegawaiplth->nip }}</td>
                     <td>{{ $item->tglsurat }}</td>
                     <td>{{ $item->no_surat }}</td>
                     <td>{{ $item->nama_plth }}</td>
                     <td>{{ $item->tgl_plth }}</td>
-                    <td>{{ $item->tmptplth }}</td>
+                    <td>{{ $item->tmpt_plth }}</td>
                     
                     {{-- <td class="text-center">
                         <a href="{{ url('storage/'.$item->file) }}" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o"></i></a>
                     </td> --}}
                     
                     <td class="text-center">
-                        {{-- @if (auth()->user()->level=="Admin") --}}
-                        {{-- <form action="{{ url('datapegawai/' .$item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin Ingin Menghapus Data?')">
+
+                        <a href="{{ url('mengikuti-pelatihan/' .$item->id. '/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                        <br>
+                        <a href="{{ url('mengikuti-pelatihan/' .$item->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>
+                        <form action="{{ url('mengikuti-pelatihan/' .$item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin Ingin Menghapus Data?')">
                             @method('delete')
                             @csrf
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-close"></i></button>
-                        </form> --}}
-                        {{-- @endif --}}
-                        <a href="{{ url('mengikuti-pelatihan/delete'.$item->id)}}" class="fa fa-close" onclick="return confirm('Yakin hapus permanen?')">
-                                  
-                                </a>
-                        
-                        <a href="{{ url('mengikuti-pelatihan/' .$item->id. '/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
-                        <a href="{{ url('mengikuti-pelatihan/' .$item->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
