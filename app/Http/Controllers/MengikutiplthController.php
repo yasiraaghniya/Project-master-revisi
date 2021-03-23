@@ -180,10 +180,9 @@ class MengikutiplthController extends Controller
         }
     }
 
-    public function cetakPeriode($tglawalmp, $tglakhirmp)
+    public function cetakPeriode(Request $request)
     {
-        $mengikutiplth = Mengikutiplth::with('pegawaiplth')->whereBetween('tglsurat', [$tglawalmp, $tglakhirmp])->latest()->get();
-        dd($mengikutiplth);
+        $mengikutiplth = Mengikutiplth::with('pegawaiplth')->whereBetween('tglsurat', [$request->date1, $request->date2])->latest()->get();
 
         if (is_null($mengikutiplth)) {
             Session::flash("flash_message", [

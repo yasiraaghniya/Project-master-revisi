@@ -108,21 +108,25 @@
   <table class="size">
     <tr>
       <th class="align">No</th>
+      <th class="align">Tanggal Surat</th>
+      <th class="align">No. Surat</th>
       <th class="align">NIP</th>
       <th class="align">Nama Pegawai</th>
-      <th class="align">Perihal</th>
-      <th class="align">Tanggal Pelatihan</th>
-      <th class="align">Tempat Pelatihan</th>
+      <th class="align">Tugas</th>
+      <th class="align">Tempat Penugasan</th>
+      <th class="align">TMT</th>
     </tr>
     @php $no=1; @endphp
-    @foreach ($filter as $item)
+    @foreach ($melaksanakantgs as $item)
     <tr>
       <td class="align">{{ $no++ }}</td>
-      <td class="align">{{ $item->pegawaiplth_id }}</td>
-      <td>{{ $item->pegawaiplth_id}}</td>
-      <td class="align">{{ $item->nama_plth }}</td>
-      <td class="align">{{ $item->tgl_plth }}</td>
-      <td class="align">{{ $item->tmpt_plth }}</td>
+      <td class="align">{{ $item->tglsurat }}</td>
+      <td class="align">{{ $item->no_surat }}</td>
+      <td class="align">{{ $item->pegawaitgs->nip }}</td>
+      <td class="align">{{ $item->pegawaitgs->nama_pegawai }}</td>
+      <td class="align">{{ $item->nama_tgs }}</td>
+      <td class="align">{{ $item->tmpt_tgs }}</td>
+      <td class="align">{{ $item->tmt }}</td>
     </tr>
     @endforeach
   </table>

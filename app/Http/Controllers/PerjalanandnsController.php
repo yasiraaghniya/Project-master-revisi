@@ -191,9 +191,9 @@ class PerjalanandnsController extends Controller
         }
     }
 
-    public function cetakPeriode($tglawalpd, $tglakhirpd)
+    public function cetakPeriode(Request $request)
     {
-        $perjalanandns = Perjalanandns::with('perjalanandns')->whereBetween('tglsurat', [$tglawalpd, $tglakhirpd])->latest()->get();
+        $perjalanandns = Perjalanandns::with('pegawaipdinas')->whereBetween('tglsurat', [$request->date1, $request->date2])->latest()->get();
 
         if (is_null($perjalanandns)) {
             Session::flash("flash_message", [
@@ -203,7 +203,7 @@ class PerjalanandnsController extends Controller
             return redirect()->back();
         } else {
             $judul = "Laporan Data Perjalanan Dinas.pdf";
-            $pdf = PDF::loadview('perjalanan/cetakperiode', compact('perjalanandns'));
+            $pdf = PDF::loadview('perjalanan/cetak', compact('perjalanandns'));
             $pdf->setPaper('F4', 'landscape');
             return $pdf->stream($judul, array("Attachment" => false));
         }

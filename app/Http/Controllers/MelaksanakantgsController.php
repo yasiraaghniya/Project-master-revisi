@@ -118,15 +118,9 @@ class MelaksanakantgsController extends Controller
 
     public function cetakPeriode(Request $request)
     {
-        $query = Melaksanakantgs::with('pegawaitgs');
+        $melaksanakantgs = Melaksanakantgs::with('pegawaitgs')->whereBetween('tglsurat', [$request->date1, $request->date2])->latest()->get();
 
-        $date1 = str_replace("-", "", $request->input('date1'));
-        $date2 = str_replace("-", "", $request->input('date2'));
-
-        !empty($date1) ? $query->whereBetween(\DB::raw('CAST(created_at as date)'), [$date1, $date2]) : null;
-        $filter = $query->get();
-
-        if (is_null($query)) {
+        if (is_null($melaksanakantgs)) {
             Session::flash("flash_message", [
                 "warna" => "alert-danger",
                 "message"   => "Data Kosong Tidak Bisa Dicetak"
@@ -134,7 +128,7 @@ class MelaksanakantgsController extends Controller
             return redirect()->back();
         } else {
             $judul = "Laporan Data Melaksanakan Tugas.pdf";
-            $pdf = PDF::loadview('melaksanakan/cetakperiode', compact('filter'));
+            $pdf = PDF::loadview('melaksanakan/cetakperiode', compact('melaksanakantgs'));
             $pdf->setPaper('F4', 'landscape');
             return $pdf->stream($judul, array("Attachment" => false));
         }

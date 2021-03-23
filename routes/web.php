@@ -61,6 +61,7 @@ Route::get('kenaikan-gaji/delete/{id?}', 'KenaikangajiController@delete');
 Route::get('/kenaikan-gaji/cetak', 'KenaikangajiController@cetak')->name('kenaikan-gaji/cetak');
 Route::get('kenaikan-gaji/edit/{id}', 'KenaikangajiController@edit');
 // Route::get('/cetak-filter/{kantor}','KenaikangajiController@cetakFilter')->name('cetak-filter');
+Route::post('/kenaikan-gaji-periode', 'PerjalanandnsController@cetakPeriode')->name('cetak-periode-perjalanandns');
 Route::resource('kenaikan-gaji', 'KenaikangajiController');
 
 //Melaksanakan Tugas
@@ -74,7 +75,7 @@ Route::resource('melaksanakan-tugas', 'MelaksanakantgsController');
 Route::get('perjalanan-dinas/delete/{id?}', 'PerjalanandnsController@delete');
 Route::get('/perjalanan-dinas/cetak', 'PerjalanandnsController@cetak')->name('perjalanan-dinas/cetak');
 Route::get('perjalanan-dinas/edit/{id}', 'PerjalanandnsController@edit');
-Route::get('/cetak-periode-perjalanandns/{tglawalpd}/{tglakhirpd}', 'PerjalanandnsController@cetakPeriode')->name('cetak-periode-perjalanandns');
+Route::post('/cetak-periode-perjalanandns', 'PerjalanandnsController@cetakPeriode')->name('cetak-periode-perjalanandns');
 // Route::get('/cetak-filter/{kantor}','KenaikangajiController@cetakFilter')->name('cetak-filter');
 Route::resource('/perjalanan-dinas', 'PerjalanandnsController');
 

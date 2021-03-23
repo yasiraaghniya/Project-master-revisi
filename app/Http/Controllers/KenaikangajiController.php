@@ -120,9 +120,9 @@ class KenaikangajiController extends Controller
         }
     }
 
-    public function cetakPeriode($tglawalkg, $tglakhirkg)
+    public function cetakPeriode(Request $request)
     {
-        $kenaikangaji = Kenaikangaji::with('kenaikangaji')->whereBetween('tglsurat', [$tglawalkg, $tglakhirkg])->latest()->get();
+        $kenaikangaji = Kenaikangaji::with('kenaikangaji')->whereBetween('tglsurat', [$request->date1, $request->date2])->latest()->get();
 
         if (is_null($kenaikangaji)) {
             Session::flash("flash_message", [
@@ -132,7 +132,7 @@ class KenaikangajiController extends Controller
             return redirect()->back();
         } else {
             $judul = "Laporan Data Melaksanakan Pelatihanr.pdf";
-            $pdf = PDF::loadview('melaksanakan/cetakperiode', compact('kenaikangaji'));
+            $pdf = PDF::loadview('kenaikan/cetak', compact('kenaikangaji'));
             $pdf->setPaper('F4', 'landscape');
             return $pdf->stream($judul, array("Attachment" => false));
         }
