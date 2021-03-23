@@ -45,10 +45,10 @@ class MengikutiplthController extends Controller
             'pegawaiplth_id' => 'required',
             'tglsurat' => 'required',
             'no_surat' => 'required',
-            'nama_plth'=> 'required',
-            'tgl_plth'=> 'required',
-            'tmpt_plth'=> 'required'
-            
+            'nama_plth' => 'required',
+            'tgl_plth' => 'required',
+            'tmpt_plth' => 'required'
+
         ], [
             'pegawaiplth_id.required' => 'Pilihan tidak boleh kosong',
             'tglsurat.required' => 'Tanggal Surat tidak boleh kosong',
@@ -56,7 +56,7 @@ class MengikutiplthController extends Controller
             'nama_plth.required' => 'Nama Kampus tidak boleh kosong',
             'tgl_plth.required' => 'Kota tidak boleh kosong',
             'tmpt_plth.required' => 'Cabang tidak boleh kosong'
-            
+
         ]);
         $mengikutiplth = new Mengikutiplth;
         $mengikutiplth->pegawaiplth_id = $request->pegawaiplth_id;
@@ -77,13 +77,14 @@ class MengikutiplthController extends Controller
      * @param  \App\Mengikutiplth  $mengikutiplth
      * @return \Illuminate\Http\Response
      */
-    public function show(Mengikutiplth $mengikutiplth)
+    public function show($id)
     {
+        $mengikutiplth = Mengikutiplth::find($id);
         // $mengikutiplth->makehidden([pegawai_id]);
         return view('mengikuti/show', compact('mengikutiplth'));
         // return $mengikutiplth;
 
-        
+
     }
 
     /**
@@ -92,10 +93,11 @@ class MengikutiplthController extends Controller
      * @param  \App\Mengikutiplth  $mengikutiplth
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mengikutiplth $mengikutiplth)
+    public function edit($id)
     {
+        $mengikutiplth = Mengikutiplth::find($id);
         $pegawais = Pegawai::all();
-        return view('mengikuti/edit', compact('mengikutiplth','pegawais'));
+        return view('mengikuti/edit', compact('mengikutiplth', 'pegawais'));
     }
 
     /**
@@ -111,10 +113,10 @@ class MengikutiplthController extends Controller
             'pegawaiplth_id' => 'required',
             'tglsurat' => 'required',
             'no_surat' => 'required',
-            'nama_plth'=> 'required',
-            'tgl_plth'=> 'required',
-            'tmpt_plth'=> 'required'
-            
+            'nama_plth' => 'required',
+            'tgl_plth' => 'required',
+            'tmpt_plth' => 'required'
+
         ], [
             'pegawaiplth_id.required' => 'Pilihan tidak boleh kosong',
             'tglsurat.required' => 'Tanggal Surat tidak boleh kosong',
@@ -122,10 +124,10 @@ class MengikutiplthController extends Controller
             'nama_plth.required' => 'Nama Kampus tidak boleh kosong',
             'tgl_plth.required' => 'Kota tidak boleh kosong',
             'tmpt_plth.required' => 'Cabang tidak boleh kosong'
-            
+
         ]);
 
-        
+
         $mengikutiplth->pegawaiplth_id = $request->pegawaiplth_id;
         $mengikutiplth->tglsurat = $request->tglsurat;
         $mengikutiplth->no_surat = $request->no_surat;
@@ -142,11 +144,11 @@ class MengikutiplthController extends Controller
         //         'nama_plth' => $request->nama_plth,
         //         'tgl_plth' =>$request->tgl_plth,
         //         'tmpt_plth' => $request->tmpt_plth,
-                
+
         //     ]);
         return redirect('mengikuti-pelatihan')->with('status', 'Data Mengikuti Pelatihan Berhasil diupdate!');
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -154,30 +156,23 @@ class MengikutiplthController extends Controller
      * @param  \App\Mengikutiplth  $mengikutiplth
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mengikutiplth $mengikutiplth)
+    public function destroy($id)
     {
-        $mengikutiplth->delete();
-        return redirect('mengikuti-pelatihan')->with('status', 'Data Mengikuti Pelatihan telah berhasil dihapus permanen!'); 
-    }
-    
-    public function delete()
-    {
-        $mengikutiplth->delete();
-        return redirect('mengikuti-pelatihan')->with('status', 'Data Mengikuti Pelatihan telah berhasil dihapus permanen!'); 
-    
+        Mengikutiplth::destroy($id);
+        return redirect('mengikuti-pelatihan')->with('status', 'Data Mengikuti Pelatihan telah berhasil dihapus permanen!');
     }
 
     public function cetak()
     {
         $mengikutiplth = Mengikutiplth::all();
 
-        if(is_null($mengikutiplth)){
+        if (is_null($mengikutiplth)) {
             Session::flash("flash_message", [
                 "warna" => "alert-danger",
                 "message"   => "Data Kosong Tidak Bisa Dicetak"
             ]);
             return redirect()->back();
-        }else{
+        } else {
             $judul = "Laporan Data Mengikuti Pelatihan.pdf";
             $pdf = PDF::loadview('mengikuti/cetak', compact('mengikutiplth'));
             $pdf->setPaper('F4', 'landscape');
@@ -185,16 +180,17 @@ class MengikutiplthController extends Controller
         }
     }
 
-    public function cetakPeriode($tglawalmp, $tglakhirmp){
-        $mengikutiplth = Mengikutiplth::with('pegawaiplth')->whereBetween('tglsurat',[$tglawalmp, $tglakhirmp])->latest()->get();
+    public function cetakPeriode(Request $request)
+    {
+        $mengikutiplth = Mengikutiplth::with('pegawaiplth')->whereBetween('tglsurat', [$request->date1, $request->date2])->latest()->get();
 
-        if(is_null($mengikutiplth)){
+        if (is_null($mengikutiplth)) {
             Session::flash("flash_message", [
                 "warna" => "alert-danger",
                 "message"   => "Data Kosong Tidak Bisa Dicetak"
             ]);
             return redirect()->back();
-        }else{
+        } else {
             $judul = "Laporan Data Mengikuti Pelatihan Filter.pdf";
             $pdf = PDF::loadview('mengikuti/cetakperiode', compact('mengikutiplth'));
             $pdf->setPaper('F4', 'landscape');

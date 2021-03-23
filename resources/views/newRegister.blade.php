@@ -76,8 +76,7 @@
                             @error('level') is-invalid @enderror" name="level" value="{{ old('level') }}" 
                             required autocomplete="level">
                             <option value="">Pilih Level</option>
-                            <option value="Admin  ">Admin</option>
-                            <option value="Operator">Operator</option>
+                            <option value="Admin">Admin</option>
                             <option value="User">User</option>
                             </select>
 

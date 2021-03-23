@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('title', 'Detail Data Mengikuti Pelatihan')
-    
+
 
 @section('breadcrumbs')
 <div class="breadcrumbs">
@@ -22,7 +22,7 @@
                 </ol>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 @endsection
 
@@ -31,9 +31,9 @@
     <div class="animated fadeIn">
 
         @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
         @endif
 
         <div class="card">
@@ -41,55 +41,55 @@
                 <div class="pull-left">
                     <strong>Detail Data Melaksanakan Tugas</strong>
                 </div>
-            <div class="pull-right">
-                <a href="{{ url('mengikuti-pelatihan') }}" class="btn btn-secondary btn-sm">
-                    <i class="fa fa-arrow-left"></i> Back
-                </a>
-            </div>
-        </div>
-        <div class="card-body table-responsive">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th style="width:30%">Tanggal Surat</th>
-                                <td>2021-02-27</td>
-                            </tr>
-                            <tr>
-                                <th>No. Surat</th>
-                                <td>B-1364/Cp.3/02/2021</td>
-                            </tr>
-                            <tr>
-                                <th>NIP</th>
-                                <td>19961123 201806 7 030</td>
-                            </tr>
-                            <tr>
-                                <th>Nama Pegawai</th>
-                                <td>Karina Haifa</td>
-                            </tr>
-                            <tr>
-                                <th>Tugas</th>
-                                <td>Memeriksa Kelengkapan acara pelantikan CPNS</td>
-                            </tr>
-                            <tr>
-                                <th>Tempat Penugasan</th>
-                                <td>Kejaksaan Tinggi Kalimantan Selatan</td>
-                            </tr>
-                            <tr>
-                                <th>TMT</th>
-                                <td>2021-03-10</td>
-                            </tr>
-                            <tr>
-                                <th>Created at</th>
-                                <td>2021-02-27 09:28:011</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="pull-right">
+                    <a href="{{ url('mengikuti-pelatihan') }}" class="btn btn-secondary btn-sm">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </a>
                 </div>
             </div>
-         
+            <div class="card-body table-responsive">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th style="width:30%">Tanggal Surat</th>
+                                    <td>{{ $melaksanakantgs->tglsurat }}</td>
+                                </tr>
+                                <tr>
+                                    <th>No. Surat</th>
+                                    <td>{{ $melaksanakantgs->no_surat }}</td>
+                                </tr>
+                                <tr>
+                                    <th>NIP</th>
+                                    <td>{{ $melaksanakantgs->pegawaitgs->nip }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Pegawai</th>
+                                    <td>{{ $melaksanakantgs->pegawaitgs->nama_pegawai }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tugas</th>
+                                    <td>{{ $melaksanakantgs->nama_tgs }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tempat Penugasan</th>
+                                    <td>{{ $melaksanakantgs->tmpt_tgs }}</td>
+                                </tr>
+                                <tr>
+                                    <th>TMT</th>
+                                    <td>{{ $melaksanakantgs->tmt }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Created at</th>
+                                    <td>{{ $melaksanakantgs->created_at }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
